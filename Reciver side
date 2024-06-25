@@ -1,0 +1,68 @@
+# RECEIVER SIDE PROGRAM
+#include <SPI.h>
+
+#include<LoRa.h>
+
+int ir=4;
+
+int
+
+prox=7;
+
+intmic=5;
+
+String data;
+
+voidsetup() {
+
+Serial.begin(9600);
+
+pinMode(ir,INPUT);
+
+pinMode(prox,INPU
+
+T);
+
+pinMode(mic,INPUT
+
+)
+
+while (!Serial);
+
+Serial.println("LoRa
+
+Sender");
+if (!LoRa.begin(433E6)) { // or 915E6, the MHz speed of yout
+
+moduleSerial.println("Starting LoRa failed!");
+
+while (1);
+
+}
+
+}
+
+void loop() {
+
+int a=digitalRead(ir);
+
+int
+
+b=digitalRead(prox);
+
+int
+
+c=digitalRead(mic);
+
+data=String(a)+':'+String(b)+':'+String(c)+':';
+
+LoRa.beginPacket();
+
+LoRa.print(data);
+
+LoRa.endPacket
+
+();delay(2000);
+
+}
+
