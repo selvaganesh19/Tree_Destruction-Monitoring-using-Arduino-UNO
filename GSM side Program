@@ -1,0 +1,206 @@
+// GSM Program
+
+#include <SoftwareSerial.h>
+
+SoftwareSerial myserial(10, 11); // RX, TX
+
+#include <SPI.h>
+
+#include <LoRa.h>
+
+#include <Wire.h>
+
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27,16,2);
+
+int led = 3;
+
+String inString = "";
+
+int val = 0;
+void setup() {
+
+Serial.begin(9600);
+
+myserial.begin(9600);
+
+pinMode(led,OUTPUT);
+
+lcd.init();
+
+lcd.init();
+
+lcd.backlight();
+
+lcd.setCursor(0,0);
+
+lcd.print(" Lora ");
+
+lcd.setCursor(0,1);
+
+lcd.print(" Receiver ");
+
+while (!Serial);
+
+Serial.println("LoRa Receiver");
+
+if (!LoRa.begin(433E6)) { // or 915E6
+
+Serial.println("Starting LoRa failed!");
+
+while (1);
+
+}
+
+}
+
+void loop() {
+
+int packetSize = LoRa.parsePacket();
+
+if (packetSize) {
+
+while (LoRa.available())
+
+{
+
+int inChar = LoRa.read();
+
+inString += (char)inChar;
+
+}
+
+Serial.println(inString);
+
+String myString = inString;
+
+String val1=getValue(myString, ':', 0);
+
+String val2=getValue(myString, ':', 1);
+
+String val3=getValue(myString, ':', 2);
+
+if(val1.toInt()==LOW)
+lcd.setCursor(0,0);
+
+lcd.print(" object ");
+
+lcd.setCursor(0,1);
+
+lcd.print(" detected ");
+
+digitalWrite(led,HIGH);
+
+gsm("object detected");
+
+delay(1000);
+
+digitalWrite(led,LOW); }
+
+else if(val2.toInt()==LOW) {
+
+gsm("Metal detected");
+
+lcd.setCursor(0,0);
+
+lcd.print(" Metal ");
+
+lcd.setCursor(0,1);
+
+lcd.print(" detected ");
+
+digitalWrite(led,HIGH);
+
+delay(1000);
+
+digitalWrite(led,LOW); }
+
+else if(val3.toInt()==LOW)
+
+{
+
+gsm("Sound detected");
+
+lcd.setCursor(0,0);
+
+lcd.print(" sound ");
+
+lcd.setCursor(0,1);
+
+lcd.print(" detected ");
+
+digitalWrite(led,HIGH);
+
+delay(1000);
+
+digitalWrite(led,LOW); }
+
+else {
+
+lcd.setCursor(0,0);
+
+lcd.print(" Lora ");
+
+lcd.setCursor(0,1);
+lcd.print(" reaciever ");
+
+delay(1000);
+
+}
+
+inString = "";
+
+LoRa.packetRssi();
+
+}
+
+}
+
+void gsm(String a)
+
+{
+
+myserial.println("AT+CMGF=1");
+
+delay(1000);
+
+myserial.println("AT+CMGS=\"+919894938971\"\r");
+
+delay(1000);
+
+myserial.println(a);
+
+delay(1000);
+
+myserial.println((char)26);// ASCII code of CTRL+Z
+
+delay(1000);
+
+}
+
+String getValue(String data, char separator, int index)
+
+{
+
+int found = 0;
+
+int strIndex[] = { 0, -1 };
+
+int maxIndex = data.length() - 1;
+
+for (int i = 0; i <= maxIndex && found <= index; i++) {
+
+if (data.charAt(i) == separator || i == maxIndex) {
+
+found++;
+
+strIndex[0] = strIndex[1] + 1;
+
+strIndex[1] = (i == maxIndex) ? i+1 : i;
+
+}
+
+}
+
+return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
