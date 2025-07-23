@@ -48,7 +48,7 @@ Deforestation and illegal tree cutting are pressing environmental issues. **Tree
 1. **Connect the Sensors:** Wire up the sensors as per the circuit diagram in the repository.
 2. **Power Up:** Connect your Arduino UNO to a power source.
 3. **Monitor:** The system will automatically start monitoring for tree destruction events.
-4. **Alerts:** On detection, the alert mechanism (buzzer, message, etc.) will be triggered.
+4. **Alerts:** On detection, the alert mechanism (buzzer, message, etc.) will be triggere.
 
 ---
 
