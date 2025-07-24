@@ -1,6 +1,6 @@
 # 🌳 Tree_Destruction-Monitoring-using-Arduino-UNO
 
-A smart system for real-time detection and monitoring of tree destruction activities using Arduino UNO. This project aims to help prevent illegal logging and support environmental conservation efforts by deploying IoT-based solutions for forest monitoring.
+A smart system for real-time detection and monitoring of tree destruction activities using Arduino UNO. This project is aims to help prevent illegal logging and support environmental conservation efforts by deploying IoT-based solutions for forest monitoring.
 
 ---
 
