@@ -16,7 +16,7 @@ Deforestation and illegal tree cutting are pressing environmental issues. **Tree
 - **Arduino UNO Powered:** Utilizes the popular Arduino UNO microcontroller for reliability and simplicity.
 - **Sensor Integration:** Compatible with vibration, tilt, and sound sensors for flexible deployment.
 - **Alert System:** Sends notifications or triggers alarms upon detection of suspicious activities.
-- **Open Source:** Freely available for customization and improvement.
+- **Open Source:** Freely available for customization and improvements.
 
 ---
 
