@@ -76,6 +76,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## License
 This project is licensed under the **MIT** License.
-
+                                                                      ---
 ---
 🔗 GitHub Repo: https://github.com/selvaganesh19/Tree_Destruction-Monitoring-using-Arduino-UNO
